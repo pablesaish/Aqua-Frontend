@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#091420"/>
+      <stop offset="100%" stop-color="#030a12"/>
+    </linearGradient>
+
+    <!-- Shield gradient -->
+    <linearGradient id="shield" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00dfff"/>
+      <stop offset="50%" stop-color="#0098e0"/>
+      <stop offset="100%" stop-color="#004080"/>
+    </linearGradient>
+
+    <!-- Inner dark fill -->
+    <linearGradient id="inner" x1="32" y1="12" x2="32" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a1a2a"/>
+      <stop offset="100%" stop-color="#050e18"/>
+    </linearGradient>
+
+    <!-- Ripple stroke gradient -->
+    <linearGradient id="ripple" x1="20" y1="30" x2="44" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00dfff" stop-opacity="0.1"/>
+      <stop offset="50%" stop-color="#00dfff"/>
+      <stop offset="100%" stop-color="#00dfff" stop-opacity="0.1"/>
+    </linearGradient>
+
+    <!-- Outer glow -->
+    <filter id="gl" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b"/>
+      <feColorMatrix in="b" type="matrix"
+        values="0 0 0 0 0
+                0 0 0 0 0.78
+                0 0 0 0 1
+                0 0 0 0.5 0" result="g"/>
+      <feMerge>
+        <feMergeNode in="g"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Drop shadow -->
+    <filter id="ds">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#00c8ff" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- Shield clip for inner content -->
+    <clipPath id="sc">
+      <path d="M32 8 L52 18 L52 38 Q52 52 32 58 Q12 52 12 38 L12 18 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+
+  <!-- Ambient glow -->
+  <ellipse cx="32" cy="32" rx="20" ry="22" fill="#0098e0" opacity="0.04"/>
+
+  <!-- ═══ Main shield outline (glowing border) ═══ -->
+  <path d="M32 8 L52 18 L52 38 Q52 52 32 58 Q12 52 12 38 L12 18 Z"
+        fill="none" stroke="url(#shield)" stroke-width="2" filter="url(#gl)" opacity="0.9"/>
+
+  <!-- Shield inner fill (dark) -->
+  <path d="M32 10.5 L50 19.5 L50 37.5 Q50 50.5 32 55.8 Q14 50.5 14 37.5 L14 19.5 Z"
+        fill="url(#inner)"/>
+
+  <!-- Inner shield subtle border -->
+  <path d="M32 10.5 L50 19.5 L50 37.5 Q50 50.5 32 55.8 Q14 50.5 14 37.5 L14 19.5 Z"
+        fill="none" stroke="#00c8ff" stroke-width="0.3" opacity="0.15"/>
+
+  <!-- ═══ Water drop silhouette (center) ═══ -->
+  <g clip-path="url(#sc)">
+    <!-- Drop outline -->
+    <path d="M32 18 C32 18 22 30 22 36.5 C22 42 26.5 46.5 32 46.5 C37.5 46.5 42 42 42 36.5 C42 30 32 18 32 18Z"
+          fill="none" stroke="#00dfff" stroke-width="1.4" filter="url(#ds)" opacity="0.85"/>
+
+    <!-- Drop inner subtle fill -->
+    <path d="M32 18 C32 18 22 30 22 36.5 C22 42 26.5 46.5 32 46.5 C37.5 46.5 42 42 42 36.5 C42 30 32 18 32 18Z"
+          fill="#00c8ff" opacity="0.06"/>
+
+    <!-- Ripple lines inside drop area -->
+    <path d="M26 34 Q29 31 32 34 Q35 37 38 34" stroke="url(#ripple)" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.7"/>
+    <path d="M27.5 38 Q30 35.5 32.5 38 Q35 40.5 37 38" stroke="url(#ripple)" stroke-width="0.8" stroke-linecap="round" fill="none" opacity="0.45"/>
+    <path d="M29 41.5 Q31 39.5 33 41.5 Q35 43.5 36.5 41.5" stroke="url(#ripple)" stroke-width="0.5" stroke-linecap="round" fill="none" opacity="0.25"/>
+
+    <!-- Specular highlight -->
+    <path d="M28.5 24 C28 26 26 31 25.5 35" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.15"/>
+
+    <!-- Top drop glow point -->
+    <circle cx="32" cy="20" r="1.2" fill="#00dfff" opacity="0.3"/>
+    <circle cx="32" cy="20" r="0.5" fill="white" opacity="0.4"/>
+  </g>
+
+  <!-- ═══ Circuit nodes on shield border ═══ -->
+  <!-- Top -->
+  <circle cx="32" cy="8" r="2" fill="#00dfff" opacity="0.9"/>
+  <circle cx="32" cy="8" r="0.8" fill="white" opacity="0.5"/>
+
+  <!-- Left shoulder -->
+  <circle cx="14" cy="17" r="1.4" fill="#00dfff" opacity="0.6"/>
+  <circle cx="14" cy="17" r="0.5" fill="white" opacity="0.3"/>
+
+  <!-- Right shoulder -->
+  <circle cx="50" cy="17" r="1.4" fill="#00dfff" opacity="0.6"/>
+  <circle cx="50" cy="17" r="0.5" fill="white" opacity="0.3"/>
+
+  <!-- Left mid -->
+  <circle cx="12" cy="30" r="1" fill="#00dfff" opacity="0.4"/>
+
+  <!-- Right mid -->
+  <circle cx="52" cy="30" r="1" fill="#00dfff" opacity="0.4"/>
+
+  <!-- Bottom -->
+  <circle cx="32" cy="58" r="1.6" fill="#00dfff" opacity="0.7"/>
+  <circle cx="32" cy="58" r="0.6" fill="white" opacity="0.35"/>
+
+  <!-- ═══ Scanning line effect ═══ -->
+  <line x1="16" y1="28" x2="48" y2="28" stroke="#00dfff" stroke-width="0.3" opacity="0.12"/>
+  <line x1="15" y1="44" x2="49" y2="44" stroke="#00dfff" stroke-width="0.3" opacity="0.08"/>
+
+  <!-- ═══ Corner micro-dots ═══ -->
+  <circle cx="7" cy="7" r="0.6" fill="#00dfff" opacity="0.12"/>
+  <circle cx="57" cy="7" r="0.6" fill="#00dfff" opacity="0.12"/>
+  <circle cx="7" cy="57" r="0.6" fill="#00dfff" opacity="0.12"/>
+  <circle cx="57" cy="57" r="0.6" fill="#00dfff" opacity="0.12"/>
+</svg>
