@@ -11,6 +11,8 @@ import { Pie, Bar } from 'react-chartjs-2';
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend as RechartsLegend, ResponsiveContainer } from 'recharts';
 import { parseSummaryData } from '../utils/dataParser';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "";
+
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
 const css = `
@@ -63,7 +65,7 @@ async function getChatAIResponse(query, data, chatHistory = []) {
   if (!data) return { text: "Data is loading...", data: null };
   
   try {
-    const response = await fetch('/api/chat', {
+    const response = await fetch(`${BACKEND_URL}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query, data, chatHistory: chatHistory.slice(-6).map(m => ({ role: m.role, text: m.text })) })
@@ -120,7 +122,7 @@ export default function Chatbot() {
       }
     }); 
 
-    fetch('/api/data')
+    fetch(`${BACKEND_URL}/api/data`)
       .then(res => res.json())
       .then(d => {
         setData(parseSummaryData(d));
