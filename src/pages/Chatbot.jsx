@@ -61,14 +61,52 @@ function pickRandom(arr, n) {
   return shuffled.slice(0, n);
 }
 
+function getRelevantData(query, chatHistory, allData) {
+  if (!allData || !allData.states) return null;
+
+  const queryLower = query.toLowerCase();
+  const historyText = chatHistory.slice(-3).map(m => m.text.toLowerCase()).join(" ");
+  const combinedContext = queryLower + " " + historyText;
+
+  // Always include all state-level summaries (small and provides overview)
+  const filteredData = {
+    states: allData.states,
+    districts: []
+  };
+
+  // Identify mentioned states to include their districts
+  const mentionedStates = allData.states.filter(s => 
+    combinedContext.includes(s.state.toLowerCase()) || 
+    (s.state.length > 5 && combinedContext.includes(s.state.toLowerCase().substring(0, 5)))
+  );
+
+  if (mentionedStates.length > 0) {
+    const stateNames = mentionedStates.map(s => s.state);
+    filteredData.districts = allData.districts.filter(d => stateNames.includes(d.state));
+  } else {
+    // If no state mentioned, maybe it's a district-only search? 
+    // For now, let's include top 10 most extracted districts as a fallback for general queries
+    // or just leave it empty to save tokens if it's a general question.
+    // Based on user feedback, it's better to be precise.
+  }
+
+  return filteredData;
+}
+
 async function getChatAIResponse(query, data, chatHistory = []) {
   if (!data) return { text: "Data is loading...", data: null };
+  
+  const relevantData = getRelevantData(query, chatHistory, data);
   
   try {
     const response = await fetch(`${BACKEND_URL}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query, data, chatHistory: chatHistory.slice(-6).map(m => ({ role: m.role, text: m.text })) })
+      body: JSON.stringify({ 
+        query, 
+        data: relevantData, 
+        chatHistory: chatHistory.slice(-6).map(m => ({ role: m.role, text: m.text })) 
+      })
     });
 
     if (!response.ok) {
