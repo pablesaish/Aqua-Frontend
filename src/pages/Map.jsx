@@ -57,6 +57,8 @@ export default function Map() {
   const [search, setSearch] = useState("");
   const [filterCat, setFilterCat] = useState("All");
   const [panelTab, setPanelTab] = useState("layers"); // "layers" | "districts"
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [panelOpen, setPanelOpen] = useState(false);
 
   const filteredDistricts = useMemo(() => {
     const q = search.toLowerCase();
@@ -176,11 +178,11 @@ export default function Map() {
         .stat-pill:hover { opacity:.85; }
       `}</style>
 
-      {/* Hamburger button for Global Sidebar */}
+      {/* Hamburger button for Global Sidebar — mobile only (CSS handles visibility) */}
       <button
         className="hamburger-btn"
         onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-        style={{ display: mobileSidebarOpen ? 'none' : 'flex', zIndex: 1100 }}
+        style={{ zIndex: 1100 }}
       >
         ☰
       </button>
