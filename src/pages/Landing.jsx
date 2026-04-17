@@ -379,7 +379,7 @@ export default function Landing() {
     { icon: "🧠", title: "Natural Language Queries",  desc: "Type questions exactly as you'd ask a human expert. No SQL, no filters — just plain English." },
     { icon: "🗺️", title: "Interactive Map",            desc: "Color-coded India map with block-level drilling. Green to red — know your region at a glance." },
     { icon: "📊", title: "Trend Analysis",             desc: "Year-over-year extraction charts from 2008 to 2023. Spot the trajectory before it's a crisis." },
-    { icon: "📄", title: "Export Reports",             desc: "Download AI-generated summaries as PDF or CSV for presentations and policy briefs." },
+    { icon: "📄", title: "Export Reports",             desc: "Download AI-generated summaries as CSV or Excel for presentations and policy briefs." },
     { icon: "🔔", title: "Multi-language",             desc: "Query in English, Hindi, or Marathi via Google Translate API. Accessible to every stakeholder." },
     { icon: "🔒", title: "Secure & User-Scoped",       desc: "JWT authentication with private chat history. Your reports, your data — fully isolated." },
   ];

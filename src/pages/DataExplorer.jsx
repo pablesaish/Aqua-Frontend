@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Sidebar from "../components/Sidebar";
-import { exportToCSV, exportToExcel, exportToPDF } from "../utils/exportUtils";
+import { exportToCSV, exportToExcel } from "../utils/exportUtils";
 import { parseSummaryData } from "../utils/dataParser";
 
 /* ══════════════════════════════════════════════════════════
@@ -357,7 +357,6 @@ export default function DataExplorer() {
     const fn = `aquaguide_data_explorer_${viewMode}_${Date.now()}`;
     if (format === "csv") exportToCSV(rows, fn + ".csv");
     else if (format === "excel") exportToExcel(rows, fn + ".xlsx", "Data Explorer");
-    else if (format === "pdf") exportToPDF(rows, `Groundwater Assessment — ${viewMode === "state" ? "State" : "District"} View`, fn + ".pdf");
   };
 
   return (
@@ -385,11 +384,11 @@ export default function DataExplorer() {
                 {/* Export */}
                 <div style={{ position: "relative" }}>
                   <button className="de-btn" onClick={() => setShowExport(!showExport)}>
-                    ⬇ Export
+                  Export
                   </button>
                   {showExport && (
                     <div className="de-export-menu">
-                      {[["📄","CSV","csv"],["📊","Excel","excel"],["📕","PDF","pdf"]].map(([icon,label,fmt]) => (
+                      {[["📄","CSV","csv"],["📊","Excel","excel"]].map(([icon,label,fmt]) => (
                         <div key={fmt} className="de-export-item" onClick={() => handleExport(fmt)}>
                           {icon} {label}
                         </div>
