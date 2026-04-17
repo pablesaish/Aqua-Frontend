@@ -684,6 +684,7 @@ export default function Chatbot() {
   const [loadingText, setLoadingText] = useState(LOADING_MESSAGES[0]);
   const [loadingStep, setLoadingStep] = useState(0);
   const [streamingIdx, setStreamingIdx] = useState(-1);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
   const activeSessionRef = useRef(null);
@@ -873,6 +874,8 @@ export default function Chatbot() {
                 ONLINE · CGWB 2024-25
               </div>
             </div>
+            {/* Mobile close */}
+            <button className="resp-hide-desktop" onClick={() => setMobileOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--muted)', fontSize: 20 }}>✕</button>
           </div>
 
           {/* New chat button */}
