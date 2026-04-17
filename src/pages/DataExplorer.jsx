@@ -100,6 +100,9 @@ const css = `
   .de-search{max-width:100%}
   .de-chips{flex-wrap:wrap}
   .de-header-top{flex-direction:column;align-items:flex-start}
+  .de-header{padding-top:64px}
+  .de-chips{margin-top:10px}
+  .de-header-top .de-btn{width:100%}
 }
 `;
 

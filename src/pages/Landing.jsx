@@ -414,11 +414,11 @@ export default function Landing() {
             onClick={() => navigate('/register')}
           >Get Started</button>
 
-          {/* Mobile Hamburger */}
+          {/* Mobile Hamburger — shown via CSS on ≤768px */}
           <button 
             className="hamburger-btn" 
             onClick={() => setMobileNavOpen(!mobileNavOpen)}
-            style={{ position: 'relative', top: 0, left: 0, display: window.innerWidth <= 768 ? 'flex' : 'none' }}
+            style={{ position: 'relative', top: 0, left: 0 }}
           >
             {mobileNavOpen ? '✕' : '☰'}
           </button>

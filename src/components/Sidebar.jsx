@@ -77,7 +77,7 @@ export default function Sidebar() {
           <button 
             className="resp-hide-desktop"
             onClick={() => setMobileOpen(false)}
-            style={{ background: 'none', border: 'none', color: 'var(--muted)', fontSize: '20px', cursor: 'pointer', display: window.innerWidth <= 768 ? 'block' : 'none' }}
+            style={{ background: 'none', border: 'none', color: 'var(--muted)', fontSize: '20px', cursor: 'pointer' }}
           >✕</button>
         </div>
         

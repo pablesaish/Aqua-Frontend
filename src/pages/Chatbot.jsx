@@ -854,8 +854,14 @@ export default function Chatbot() {
       <style>{css}</style>
       <div style={{ display: "flex", height: "100vh", background: "var(--bg)", overflow: "hidden", fontFamily: "'Inter', var(--font-body), sans-serif" }}>
 
+        {/* ═══ Sidebar overlay (mobile) ═══ */}
+        <div
+          className={`chatbot-sidebar-overlay${mobileOpen ? ' active' : ''}`}
+          onClick={() => setMobileOpen(false)}
+        />
+
         {/* ═══ Sidebar ═══ */}
-        <aside style={{ width: 260, background: "var(--bg2)", borderRight: "1px solid var(--border)", display: "flex", flexDirection: "column", flexShrink: 0 }}>
+        <aside className={`chatbot-sidebar${mobileOpen ? ' mobile-open' : ''}`}>
           {/* Logo header */}
           <div style={{ padding: "18px 16px", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 10 }}>
             <button onClick={() => navigate("/dashboard")}
@@ -895,7 +901,7 @@ export default function Chatbot() {
               <>
                 <div style={{ fontSize: 9, color: "var(--muted)", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8, padding: '0 6px' }}>Recent Chats</div>
                 {sessions.map(s => (
-                  <div key={s.id} onClick={() => loadSession(s.id)}
+                  <div key={s.id} onClick={() => { loadSession(s.id); setMobileOpen(false); }}
                     className="nav-item"
                     style={{
                       padding: "9px 10px", marginBottom: 3,
@@ -928,14 +934,20 @@ export default function Chatbot() {
         <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
 
           {/* Header */}
-          <div style={{ padding: "14px 24px", borderBottom: "1px solid var(--border)", background: "var(--bg2)", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
-            <div>
+          <div style={{ padding: "14px 24px", borderBottom: "1px solid var(--border)", background: "var(--bg2)", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0, position: "relative" }}>
+            {/* Mobile hamburger — opens session sidebar */}
+            <button
+              className="chatbot-hamburger"
+              onClick={() => setMobileOpen(true)}
+              aria-label="Open chat history"
+            >☰</button>
+            <div style={{ paddingLeft: 0 }}>
               <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 17, letterSpacing: '-0.02em' }}>Groundwater Intelligence</div>
               <div style={{ fontSize: 11, color: "var(--muted)", fontFamily: "'JetBrains Mono', monospace", marginTop: 3 }}>
                 CGWB FY 2024-25 · 713 assessment units · 36 States/UTs
               </div>
             </div>
-            <div style={{ display: "flex", gap: 12, alignItems: 'center' }}>
+            <div className="resp-hide-mobile" style={{ display: "flex", gap: 12, alignItems: 'center' }}>
               {[
                 ["Safe", "#10b981"],
                 ["Semi-Critical", "#f0dc3a"],
@@ -972,7 +984,7 @@ export default function Chatbot() {
                   I'll generate <strong style={{ color: 'var(--accent)' }}>interactive charts</strong> to visualize insights!
                 </p>
 
-                <div style={{ width: "100%", maxWidth: 740, display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12 }}>
+                <div className="suggestions-grid" style={{ width: "100%", maxWidth: 740, display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12 }}>
                   {suggestions.map((s, i) => (
                     <div key={s} className="suggestion-card" onClick={() => send(s)}
                       style={{ padding: "15px 18px", background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 14, cursor: "pointer", display: "flex", alignItems: "flex-start", gap: 12, boxShadow: "0 2px 12px rgba(0,0,0,0.12)" }}>

@@ -117,7 +117,7 @@ export default function Dashboard() {
         <Sidebar />
 
         {/* Main content */}
-        <main className="resp-pad-section" style={{ flex: 1, padding: "32px 36px", overflowY: "auto" }}>
+        <main className="resp-pad-section dash-main" style={{ flex: 1, padding: "32px 36px", overflowY: "auto" }}>
           {!data ? (
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
               <div style={{ color: "var(--accent)", fontFamily: "var(--font-mono)" }}>Loading FY 2024-25 Data...</div>
@@ -138,7 +138,7 @@ export default function Dashboard() {
                   </h1>
                   <p style={{ color: "var(--muted)", fontSize: 14, marginTop: 4, fontWeight: 300 }}>India groundwater intelligence — ask anything.</p>
                 </div>
-                <div style={{ display: "flex", gap: 10, alignItems: "center", width: window.innerWidth <= 768 ? '100%' : 'auto' }}>
+                <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
                   {/* Export Button */}
                   <div style={{ position: "relative", flex: 1 }}>
                     <button
@@ -198,7 +198,7 @@ export default function Dashboard() {
               </div>
 
               {/* Main grid */}
-              <div className="resp-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: 20, marginBottom: 20 }}>
+              <div className="resp-grid-2 dash-grid-main" style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: 20, marginBottom: 20 }}>
 
                 {/* Quick actions */}
                 <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 16, padding: "24px", animation: "fadeUp 0.5s ease 0.2s both" }}>
@@ -241,7 +241,7 @@ export default function Dashboard() {
               </div>
 
               {/* Recommendations + Trend Row */}
-              <div className="resp-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 20 }}>
+              <div className="resp-grid-2 dash-grid-main" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 20 }}>
 
                 {/* 🆕 Recommendations Card */}
                 <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 16, padding: "24px", animation: "fadeUp 0.5s ease 0.3s both" }}>

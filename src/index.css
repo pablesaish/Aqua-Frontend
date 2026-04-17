@@ -471,3 +471,105 @@ body {
   .resp-pad-section { padding-left: 16px !important; padding-right: 16px !important; }
   .resp-stack-mobile { flex-direction: column !important; gap: 12px !important; }
 }
+
+/* ─── Mobile-only padding-top (for pages with floating hamburger) ── */
+/* Prevents content from being hidden under the hamburger button on mobile */
+@media (max-width: 768px) {
+  .mobile-pt { padding-top: 64px !important; }
+  .mobile-pt-sm { padding-top: 56px !important; }
+}
+
+/* ─── resp-hide-desktop: hidden on desktop, visible only on mobile ── */
+.resp-hide-desktop { display: none !important; }
+@media (max-width: 768px) {
+  .resp-hide-desktop { display: block !important; }
+}
+
+/* ─── Chatbot internal sidebar (session list) ────────────────────── */
+.chatbot-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  transition: background 0.35s, border-color 0.35s;
+}
+
+/* Mobile: slide in from left as overlay */
+@media (max-width: 768px) {
+  .chatbot-sidebar {
+    position: fixed !important;
+    left: -280px;
+    top: 0;
+    width: 280px !important;
+    height: 100vh;
+    z-index: 999;
+    transition: left 0.4s cubic-bezier(.22, 1, .36, 1), background 0.35s;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+  }
+  .chatbot-sidebar.mobile-open {
+    left: 0;
+  }
+  .chatbot-hamburger {
+    display: flex !important;
+  }
+}
+
+/* ─── Chatbot sidebar overlay (mobile backdrop) ──────────────────── */
+.chatbot-sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 998;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+.chatbot-sidebar-overlay.active { display: block; }
+
+/* ─── Chatbot hamburger (mobile only) ───────────────────────────── */
+.chatbot-hamburger {
+  display: none;
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 100;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: var(--surface-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 16px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  box-shadow: var(--card-shadow);
+}
+.chatbot-hamburger:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ─── Dashboard: content area padding on mobile ─────────────────── */
+@media (max-width: 768px) {
+  .dash-main { padding-top: 64px !important; }
+
+  /* Right-fixed column in dashboard grid collapses */
+  .dash-grid-main { grid-template-columns: 1fr !important; }
+
+  /* DataExplorer header gets padding to clear hamburger */
+  .de-header { padding-top: 64px !important; }
+
+  /* Chatbot: full-width chat area when sidebar is hidden */
+  .chatbot-main { width: 100% !important; }
+
+  /* Suggestions grid collapses on mobile */
+  .suggestions-grid { grid-template-columns: 1fr !important; }
+}
+
