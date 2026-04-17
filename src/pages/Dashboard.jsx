@@ -7,12 +7,12 @@ import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import Sidebar from "../components/Sidebar";
 import { getTopCriticalStates } from "../utils/recommendations";
-import { exportToCSV, exportToExcel, exportToPDF } from "../utils/exportUtils";
+import { exportToCSV, exportToExcel } from "../utils/exportUtils";
 
 /* ══════════════════════════════════════════════════════════
    AquaGuide AI – Dashboard (Upgraded v2)
    ─ Recommendations card with top critical states
-   ─ Export national summary data (CSV / Excel / PDF)
+   ─ Export national summary data (CSV / Excel)
    ─ Data sources card with reference links
    ══════════════════════════════════════════════════════════ */
 
@@ -77,7 +77,6 @@ export default function Dashboard() {
     const fn = `aquaguide_national_summary_${Date.now()}`;
     if (format === "csv") exportToCSV(rows, fn + ".csv");
     else if (format === "excel") exportToExcel(rows, fn + ".xlsx", "National Summary");
-    else if (format === "pdf") exportToPDF(rows, "National Groundwater Summary — FY 2024-25", fn + ".pdf");
   };
 
   /* ─── Derived Data ─────────────────────────────────── */
@@ -151,7 +150,7 @@ export default function Dashboard() {
                         fontFamily: "var(--font-body)", transition: "all 0.25s", width: '100%'
                       }}
                     >
-                      ⬇ Export
+                    Export
                     </button>
                     {showExportMenu && (
                       <div style={{
@@ -160,7 +159,7 @@ export default function Dashboard() {
                         padding: 6, minWidth: 150, zIndex: 20, boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
                         animation: "fadeUp 0.15s ease both"
                       }}>
-                        {[["📄", "CSV", "csv"], ["📊", "Excel", "excel"], ["📕", "PDF", "pdf"]].map(([icon, label, fmt]) => (
+                        {[["📄", "CSV", "csv"], ["📊", "Excel", "excel"]].map(([icon, label, fmt]) => (
                           <div key={fmt} onClick={() => handleExport(fmt)} style={{
                             padding: "8px 12px", borderRadius: 6, fontSize: 12, color: "var(--text)",
                             cursor: "pointer", display: "flex", alignItems: "center", gap: 8,
